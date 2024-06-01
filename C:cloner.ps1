@@ -1,9 +1,13 @@
 # Parameters
 $sourceDrive = "C:"
 $blockSize = 4MB
-$ncPath = "C:\path\to\nc.exe"  # Update this path to where your nc.exe is located
-$targetIP = "192.168.43.101"  # Update this to the receiver's IP address
+$ncatUrl = "https://github.com/cyberisltd/NcatPortable/blob/master/ncat.exe"  # URL to download ncat
+$ncatPath = "$env:TEMP\ncat.exe"  # Path to save downloaded ncat
+$targetIP = "127.0.0.1"  # Update this to the receiver's IP address
 $targetPort = 12345
+
+# Download ncat
+Invoke-WebRequest -Uri $ncatUrl -OutFile $ncatPath
 
 # Open a file stream for reading the source drive
 $driveStream = [System.IO.File]::OpenRead("\\.\$sourceDrive`:")
@@ -12,7 +16,7 @@ $driveStream = [System.IO.File]::OpenRead("\\.\$sourceDrive`:")
 $buffer = New-Object byte[] $blockSize
 
 # Create the Netcat process
-$ncProcess = Start-Process -FilePath $ncPath -ArgumentList "$targetIP $targetPort" -NoNewWindow -RedirectStandardInput "C:\path\to\temp\input.bin" -PassThru
+$ncProcess = Start-Process -FilePath $ncPath -ArgumentList "$targetIP $targetPort" -NoNewWindow -RedirectStandardInput -PassThru
 
 # Write the drive data to the Netcat process
 try {
